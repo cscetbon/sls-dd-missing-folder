@@ -1,3 +1,2 @@
 def handler(event, _):
-    return 2
-
+    pass

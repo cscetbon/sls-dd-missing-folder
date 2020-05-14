@@ -1,36 +1,25 @@
 service:
-  name: sls-dd-missing-folder
+  name: sls-no-such-folder
 
 provider:
   name: aws
   stage: dev
   runtime: python3.7
   region: us-west-2
-  environment:
-    ENV: ${self:provider.stage}
-
-custom:
-  pythonRequirements:
-    slim: true
 
 package:
   individually: true
-  exclude:
-    - "**/*"
 
 plugins:
   - serverless-python-requirements
 
 functions:
   f1:
-    module: sources/f1
+    module: f1
     handler: handler.handler
-    package:
-      include:
-        - sources/f1
   f2:
-    module: sources/f2
+    module: f2
     handler: handler.handler
-    package:
-      include:
-        - sources/f2
+  f3:
+    module: sources/f3
+    handler: handler.handler

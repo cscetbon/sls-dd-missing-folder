@@ -21,6 +21,8 @@ custom:
 
 package:
   individually: true
+  exclude:
+    - "**/*"
 
 plugins:
   - serverless-python-requirements
@@ -30,6 +32,14 @@ functions:
   f1:
     module: f1
     handler: handler.handler
+    package:
+      include:
+        - f1/handler.py
+        - datadog_handlers/*.py
   f2:
     module: f2
     handler: handler.handler
+    package:
+      include:
+        - f2/handler.py
+        - datadog_handlers/*.py

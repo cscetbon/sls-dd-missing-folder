@@ -6,6 +6,8 @@ provider:
   stage: dev
   runtime: python3.7
   region: us-west-2
+  environment:
+    ENV: ${self:provider.stage}
 
 custom:
   pythonRequirements:
@@ -23,16 +25,12 @@ functions:
   f1:
     module: sources/f1
     handler: handler.handler
-    environment:
-      ENV: ${self:provider.stage}
     package:
       include:
         - sources/f1
   f2:
     module: sources/f2
     handler: handler.handler
-    environment:
-      ENV: ${self:provider.stage}
     package:
       include:
         - sources/f2

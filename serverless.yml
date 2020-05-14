@@ -6,10 +6,18 @@ provider:
   stage: dev
   runtime: python3.7
   region: us-west-2
+  tracing:
+    lambda: true
+    apiGateway: true
+  environment:
+    ENV: ${self:provider.stage}
 
 custom:
   pythonRequirements:
     slim: true
+  datadog:
+    logLevel: info
+    flushMetricsToLogs: true
 
 package:
   individually: true
@@ -18,21 +26,20 @@ package:
 
 plugins:
   - serverless-python-requirements
+  - serverless-plugin-datadog
 
 functions:
   f1:
     module: sources/f1
     handler: handler.handler
-    environment:
-      ENV: ${self:provider.stage}
     package:
       include:
         - sources/f1
+        - datadog_handlers/*.py
   f2:
     module: sources/f2
     handler: handler.handler
-    environment:
-      ENV: ${self:provider.stage}
     package:
       include:
         - sources/f2
+        - datadog_handlers/*.py
